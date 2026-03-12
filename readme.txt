@@ -4,7 +4,7 @@ Tags: weather, shortcode, geolocation, open-meteo, github-updater
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,12 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 
 == Changelog ==
 
+= 0.1.1 =
+
+* Added GitHub Actions CI and release workflows
+* Added repository housekeeping with a project gitignore
+* Added release checklist documentation and changelog tracking
+
 = 0.1.0 =
 
 * Initial plugin scaffold
@@ -65,6 +71,10 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 * Built-in GitHub Releases updater
 
 == Upgrade Notice ==
+
+= 0.1.1 =
+
+Adds GitHub release automation and release documentation polish.
 
 = 0.1.0 =
 

@@ -3,7 +3,7 @@
  * Plugin Name: Simplicity Weather
  * Plugin URI:  https://github.com/Jamezhall/simplicity-weather
  * Description: Pull current weather data from specific geolocations with admin management, shortcode rendering, and GitHub-based updates.
- * Version:     0.1.0
+ * Version:     0.1.1
  * Author:      James Hall
  * Text Domain: simplicity-weather
  * Requires PHP: 7.4
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SIMPLICITY_WEATHER_VERSION', '0.1.0' );
+define( 'SIMPLICITY_WEATHER_VERSION', '0.1.1' );
 define( 'SIMPLICITY_WEATHER_FILE', __FILE__ );
 define( 'SIMPLICITY_WEATHER_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SIMPLICITY_WEATHER_URL', plugin_dir_url( __FILE__ ) );
