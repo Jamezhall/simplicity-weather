@@ -1,0 +1,53 @@
+name: Release Build
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Run PHP lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r file; do
+            php -l "$file"
+          done < <(find . -type f -name "*.php" -not -path "./.git/*")
+
+      - name: Prepare build directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p build/simplicity-weather
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='build/' \
+            --exclude='.gitignore' \
+            --exclude='node_modules/' \
+            --exclude='tests/' \
+            ./ build/simplicity-weather/
+
+      - name: Create plugin zip
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd build
+          zip -r simplicity-weather.zip simplicity-weather
+
+      - name: Upload release asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/simplicity-weather.zip

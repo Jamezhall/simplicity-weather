@@ -1,0 +1,28 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Build artifacts
+build/
+dist/
+*.zip
+
+# Dependency directories
+node_modules/
+vendor/
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# IDE settings
+.idea/
+.vscode/
+
+# Local tooling caches
+.phpunit.result.cache

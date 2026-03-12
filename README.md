@@ -34,6 +34,24 @@ To deliver plugin updates through WordPress:
 2. Attach an installable plugin zip named like `simplicity-weather.zip`.
 3. Make sure the zip extracts to a single `simplicity-weather` plugin folder.
 
+## Release Checklist
+
+1. Update the plugin version in `simplicity-weather.php`.
+2. Review `readme.txt` and update the changelog if needed.
+3. Commit and push your changes to GitHub.
+4. Create a tag like `v0.1.1` that matches the plugin version.
+5. Publish a GitHub Release for that tag.
+6. Confirm GitHub Actions uploads `simplicity-weather.zip` to the release.
+7. Verify the WordPress site detects the new version in the Plugins screen.
+
+## First Release
+
+1. Initialize the repository if needed with `git init`.
+2. Add the GitHub remote: `git remote add origin https://github.com/Jamezhall/simplicity-weather.git`
+3. Commit the plugin files.
+4. Push the default branch to GitHub.
+5. Create and publish your first release.
+
 ## Notes
 
 - Plugin data is preserved on uninstall by default.
