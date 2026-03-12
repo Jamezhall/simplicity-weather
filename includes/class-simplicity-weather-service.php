@@ -64,6 +64,7 @@ class Simplicity_Weather_Service {
 			'default_units'        => 'metric',
 			'default_refresh'      => 30,
 			'enable_logging'       => 1,
+			'log_retention_days'   => 30,
 			'cleanup_on_uninstall' => 0,
 			'github_repository'    => 'Jamezhall/simplicity-weather',
 		);
@@ -142,10 +143,12 @@ class Simplicity_Weather_Service {
 		foreach ( $locations as $location ) {
 			$cache = $this->cache->find_by_location( (int) $location['id'] );
 			$data  = ! empty( $cache['normalized_json'] ) ? json_decode( $cache['normalized_json'], true ) : array();
+			$log   = $this->logs->latest_by_location( (int) $location['id'] );
 
 			$rows[] = array(
 				'location' => $location,
 				'cache'    => $cache,
+				'log'      => $log,
 				'weather'  => is_array( $data ) ? $data : array(),
 				'is_stale' => $cache ? $this->is_cache_stale( $cache ) : true,
 			);
@@ -161,7 +164,7 @@ class Simplicity_Weather_Service {
 	 * @return int|WP_Error
 	 */
 	public function save_location( $input ) {
-		$timezone = sanitize_text_field( $input['timezone'] );
+		$timezone = ! empty( $input['timezone'] ) ? sanitize_text_field( $input['timezone'] ) : 'Europe/London';
 
 		if ( ! in_array( $timezone, timezone_identifiers_list(), true ) ) {
 			return new WP_Error( 'simplicity_weather_invalid_timezone', __( 'Please select a valid timezone.', 'simplicity-weather' ) );
@@ -214,6 +217,8 @@ class Simplicity_Weather_Service {
 	 * @return void
 	 */
 	public function refresh_due_locations() {
+		$this->prune_logs_by_retention();
+
 		foreach ( $this->locations->active() as $location ) {
 			$cache = $this->cache->find_by_location( (int) $location['id'] );
 
@@ -260,6 +265,95 @@ class Simplicity_Weather_Service {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Refresh all active locations immediately.
+	 *
+	 * @return array
+	 */
+	public function refresh_all_locations() {
+		$results = array(
+			'success' => 0,
+			'error'   => 0,
+			'total'   => 0,
+		);
+
+		foreach ( $this->locations->active() as $location ) {
+			++$results['total'];
+
+			$result = $this->refresh_location( (int) $location['id'] );
+
+			if ( is_wp_error( $result ) ) {
+				++$results['error'];
+			} else {
+				++$results['success'];
+			}
+		}
+
+		$this->prune_logs_by_retention();
+
+		return $results;
+	}
+
+	/**
+	 * Get status page diagnostics.
+	 *
+	 * @return array
+	 */
+	public function get_diagnostics() {
+		$rows             = $this->get_location_status_rows();
+		$active_locations = $this->locations->active();
+		$stale_count      = 0;
+		$error_count      = 0;
+
+		foreach ( $rows as $row ) {
+			if ( $row['is_stale'] ) {
+				++$stale_count;
+			}
+
+			if ( ! empty( $row['cache']['error_message'] ) || ( ! empty( $row['log']['status'] ) && 'error' === $row['log']['status'] ) ) {
+				++$error_count;
+			}
+		}
+
+		return array(
+			'cron_registered' => (bool) wp_next_scheduled( Simplicity_Weather_Scheduler::EVENT_HOOK ),
+			'next_run'        => wp_next_scheduled( Simplicity_Weather_Scheduler::EVENT_HOOK ),
+			'active_count'    => count( $active_locations ),
+			'stale_count'     => $stale_count,
+			'error_count'     => $error_count,
+		);
+	}
+
+	/**
+	 * Get recent logs.
+	 *
+	 * @param array $filters Log filters.
+	 * @return array
+	 */
+	public function get_logs( $filters = array() ) {
+		return $this->logs->get_logs( $filters, 200 );
+	}
+
+	/**
+	 * Prune logs using configured retention.
+	 *
+	 * @return int
+	 */
+	public function prune_logs_by_retention() {
+		$days = isset( $this->get_settings()['log_retention_days'] ) ? absint( $this->get_settings()['log_retention_days'] ) : 30;
+
+		return $this->logs->prune_older_than_days( $days );
+	}
+
+	/**
+	 * Clear all logs.
+	 *
+	 * @return int
+	 */
+	public function clear_all_logs() {
+		return $this->logs->clear_all();
 	}
 
 	/**

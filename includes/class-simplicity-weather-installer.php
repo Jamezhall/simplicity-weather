@@ -88,6 +88,7 @@ class Simplicity_Weather_Installer {
 			'default_units'        => 'metric',
 			'default_refresh'      => 30,
 			'enable_logging'       => 1,
+			'log_retention_days'   => 30,
 			'cleanup_on_uninstall' => 0,
 			'github_repository'    => 'Jamezhall/simplicity-weather',
 		);

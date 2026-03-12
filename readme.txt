@@ -4,7 +4,7 @@ Tags: weather, shortcode, geolocation, open-meteo, github-updater
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.1
+Stable tag: 0.1.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,8 +17,9 @@ Simplicity Weather is a reusable WordPress plugin for pulling current weather da
 Features include:
 
 * Current weather data powered by Open-Meteo
-* Custom admin pages for locations, status, and settings
+* Custom admin pages for locations, status, settings, and logs
 * Custom database tables for locations, cache, and logs
+* Refresh-all tools, cron diagnostics, and log retention controls
 * Shortcode output with `[simplicity_weather location="your-slug"]`
 * PHP template helpers for themes
 * Built-in GitHub Releases updater for public repositories
@@ -29,9 +30,8 @@ This version focuses on current weather only for a clean, maintainable v1 founda
 
 1. Upload the plugin folder to `/wp-content/plugins/` or install the zip through WordPress.
 2. Activate the plugin through the `Plugins` screen.
-3. Go to `Simplicity Weather > Settings` and confirm the GitHub repository value.
-4. Go to `Simplicity Weather > Locations` and add one or more saved locations.
-5. Use the shortcode or template functions where needed.
+3. Go to `Simplicity Weather > Locations` and add one or more saved locations.
+4. Use the shortcode or template functions where needed.
 
 == Frequently Asked Questions ==
 
@@ -55,6 +55,19 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 
 == Changelog ==
 
+= 0.1.3 =
+
+* Added a Refresh All Locations action and status diagnostics for cron health and next run timing
+* Added a Logs admin page with filtering, prune-old, and clear-all tools
+* Added configurable log retention with 30 days as the default
+* Switched the location timezone field to a dropdown and defaulted new locations to Europe/London
+* Removed GitHub repository editing from the settings page
+
+= 0.1.2 =
+
+* Improved the plugin details modal to load the description from `readme.txt`
+* Kept changelog content sourced from GitHub Release notes for update-specific messaging
+
 = 0.1.1 =
 
 * Added GitHub Actions CI and release workflows
@@ -71,6 +84,14 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 * Built-in GitHub Releases updater
 
 == Upgrade Notice ==
+
+= 0.1.3 =
+
+Adds log management, diagnostics, bulk refresh tools, and improved timezone handling.
+
+= 0.1.2 =
+
+Improves the plugin details modal by showing the readme description alongside GitHub release changelog notes.
 
 = 0.1.1 =
 

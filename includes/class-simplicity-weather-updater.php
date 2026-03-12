@@ -99,10 +99,44 @@ class Simplicity_Weather_Updater {
 			'homepage'      => $release['url'],
 			'download_link' => $release['package'],
 			'sections'      => array(
-				'description' => __( 'Current weather plugin powered by Open-Meteo with shortcode and template function output.', 'simplicity-weather' ),
+				'description' => $this->get_readme_description(),
 				'changelog'   => ! empty( $release['body'] ) ? wp_kses_post( wpautop( $release['body'] ) ) : __( 'See the latest GitHub release for details.', 'simplicity-weather' ),
 			),
 		);
+	}
+
+	/**
+	 * Get the plugin description section from readme.txt.
+	 *
+	 * @return string
+	 */
+	protected function get_readme_description() {
+		$readme_path = SIMPLICITY_WEATHER_PATH . 'readme.txt';
+
+		if ( ! file_exists( $readme_path ) || ! is_readable( $readme_path ) ) {
+			return __( 'Current weather plugin powered by Open-Meteo with shortcode and template function output.', 'simplicity-weather' );
+		}
+
+		$contents = file_get_contents( $readme_path );
+
+		if ( false === $contents ) {
+			return __( 'Current weather plugin powered by Open-Meteo with shortcode and template function output.', 'simplicity-weather' );
+		}
+
+		if ( ! preg_match( '/== Description ==\s*(.+?)(?:\n== [^=]+ ==|\z)/s', $contents, $matches ) ) {
+			return __( 'Current weather plugin powered by Open-Meteo with shortcode and template function output.', 'simplicity-weather' );
+		}
+
+		$description = trim( $matches[1] );
+
+		if ( '' === $description ) {
+			return __( 'Current weather plugin powered by Open-Meteo with shortcode and template function output.', 'simplicity-weather' );
+		}
+
+		$description = preg_replace( '/^\*\s+/m', '- ', $description );
+		$description = preg_replace( '/^=\s*(.+?)\s*=\s*$/m', '<h4>$1</h4>', $description );
+
+		return wp_kses_post( wpautop( $description ) );
 	}
 
 	/**

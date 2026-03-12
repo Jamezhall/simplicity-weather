@@ -170,8 +170,8 @@ class Simplicity_Weather_Plugin {
 		$current['default_units']         = ( isset( $settings['default_units'] ) && 'imperial' === $settings['default_units'] ) ? 'imperial' : 'metric';
 		$current['default_refresh']       = isset( $settings['default_refresh'] ) ? max( 15, absint( $settings['default_refresh'] ) ) : 30;
 		$current['enable_logging']        = ! empty( $settings['enable_logging'] ) ? 1 : 0;
+		$current['log_retention_days']    = isset( $settings['log_retention_days'] ) ? max( 0, absint( $settings['log_retention_days'] ) ) : 30;
 		$current['cleanup_on_uninstall']  = ! empty( $settings['cleanup_on_uninstall'] ) ? 1 : 0;
-		$current['github_repository']     = isset( $settings['github_repository'] ) ? sanitize_text_field( $settings['github_repository'] ) : '';
 
 		return $current;
 	}
