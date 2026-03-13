@@ -174,6 +174,7 @@ class Simplicity_Weather_Plugin {
 		$current['badge_text_color']      = $this->sanitize_hex_setting( isset( $settings['badge_text_color'] ) ? $settings['badge_text_color'] : '', '#ffffff' );
 		$current['badge_background_color'] = $this->sanitize_hex_setting( isset( $settings['badge_background_color'] ) ? $settings['badge_background_color'] : '', '#1f2937' );
 		$current['badge_font_family']     = isset( $settings['badge_font_family'] ) ? sanitize_text_field( $settings['badge_font_family'] ) : 'Inter, sans-serif';
+		$current['badge_font_size']       = $this->sanitize_css_dimension_setting( isset( $settings['badge_font_size'] ) ? $settings['badge_font_size'] : '', '14px' );
 		$current['badge_padding']         = $this->sanitize_css_spacing_setting( isset( $settings['badge_padding'] ) ? $settings['badge_padding'] : '', '6px 12px' );
 		$current['badge_border_radius']   = $this->sanitize_css_dimension_setting( isset( $settings['badge_border_radius'] ) ? $settings['badge_border_radius'] : '', '999px' );
 		$current['cleanup_on_uninstall']  = ! empty( $settings['cleanup_on_uninstall'] ) ? 1 : 0;

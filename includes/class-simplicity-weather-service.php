@@ -68,6 +68,7 @@ class Simplicity_Weather_Service {
 			'badge_text_color'     => '#ffffff',
 			'badge_background_color' => '#1f2937',
 			'badge_font_family'    => 'Inter, sans-serif',
+			'badge_font_size'      => '14px',
 			'badge_padding'        => '6px 12px',
 			'badge_border_radius'  => '999px',
 			'cleanup_on_uninstall' => 0,
@@ -347,9 +348,10 @@ class Simplicity_Weather_Service {
 	 * @param string $slug Location slug.
 	 * @param string $fields Requested fields list.
 	 * @param string $separator Output separator.
+	 * @param string $before Before text.
 	 * @return string
 	 */
-	public function get_badge_text( $slug, $fields = '', $separator = ', ' ) {
+	public function get_badge_text( $slug, $fields = '', $separator = ', ', $before = '' ) {
 		$data = $this->get_weather_by_slug( $slug );
 
 		if ( empty( $data['current'] ) || empty( $data['location'] ) ) {
@@ -360,6 +362,7 @@ class Simplicity_Weather_Service {
 			$data,
 			simplicity_weather_parse_fields( $fields ),
 			array(
+				'before'       => $before,
 				'separator'    => $separator,
 				'show_updated' => true,
 			)

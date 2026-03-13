@@ -38,6 +38,7 @@ function simplicity_weather_render( $slug, $args = array() ) {
 	$args = wp_parse_args(
 		$args,
 		array(
+			'before'       => '',
 			'fields'       => '',
 			'format'       => 'html',
 			'separator'    => ', ',
@@ -152,6 +153,7 @@ function simplicity_weather_render_text( $data, $fields, $args ) {
  */
 function simplicity_weather_build_text_output( $data, $fields, $args ) {
 	$parts     = array();
+	$before    = isset( $args['before'] ) ? (string) $args['before'] : '';
 	$separator = isset( $args['separator'] ) ? (string) $args['separator'] : ', ';
 
 	if ( simplicity_weather_should_render_field( 'location', $fields ) ) {
@@ -184,5 +186,5 @@ function simplicity_weather_build_text_output( $data, $fields, $args ) {
 		);
 	}
 
-	return implode( $separator, $parts );
+	return $before . implode( $separator, $parts );
 }

@@ -99,6 +99,7 @@ class Simplicity_Weather_Shortcode {
 				'fields'    => '',
 				'format'    => 'html',
 				'mode'      => '',
+				'before'    => '',
 				'separator' => ', ',
 			),
 			$atts,
@@ -118,6 +119,7 @@ class Simplicity_Weather_Shortcode {
 		return simplicity_weather_render(
 			$atts['location'],
 			array(
+				'before'    => $atts['before'],
 				'fields'    => $atts['fields'],
 				'format'    => $atts['format'],
 				'separator' => $atts['separator'],
@@ -142,10 +144,13 @@ class Simplicity_Weather_Shortcode {
 			esc_attr( $settings['badge_border_radius'] )
 		);
 
+		$style .= sprintf( '--sw-badge-font-size:%s;', esc_attr( $settings['badge_font_size'] ) );
+
 		return sprintf(
-			'<div class="simplicity-weather-badge is-loading" aria-live="polite" aria-busy="true" data-location="%1$s" data-fields="%2$s" data-separator="%3$s" style="%4$s"><span class="simplicity-weather-badge__skeleton" aria-hidden="true"></span><span class="screen-reader-text">%5$s</span></div>',
+			'<div class="simplicity-weather-badge is-loading" aria-live="polite" aria-busy="true" data-location="%1$s" data-fields="%2$s" data-before="%3$s" data-separator="%4$s" style="%5$s"><span class="simplicity-weather-badge__skeleton" aria-hidden="true"></span><span class="screen-reader-text">%6$s</span></div>',
 			esc_attr( sanitize_title( $atts['location'] ) ),
 			esc_attr( $atts['fields'] ),
+			esc_attr( $atts['before'] ),
 			esc_attr( $atts['separator'] ),
 			$style,
 			esc_html__( 'Loading weather', 'simplicity-weather' )
@@ -160,13 +165,14 @@ class Simplicity_Weather_Shortcode {
 	public function ajax_badge() {
 		$location  = isset( $_REQUEST['location'] ) ? sanitize_title( wp_unslash( $_REQUEST['location'] ) ) : '';
 		$fields    = isset( $_REQUEST['fields'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['fields'] ) ) : '';
+		$before    = isset( $_REQUEST['before'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['before'] ) ) : '';
 		$separator = isset( $_REQUEST['separator'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['separator'] ) ) : ', ';
 
 		if ( empty( $location ) ) {
 			wp_send_json_error( array( 'message' => __( 'Weather unavailable', 'simplicity-weather' ) ), 400 );
 		}
 
-		$text = $this->service->get_badge_text( $location, $fields, $separator );
+		$text = $this->service->get_badge_text( $location, $fields, $separator, $before );
 
 		if ( '' === $text ) {
 			wp_send_json_error( array( 'message' => __( 'Weather unavailable', 'simplicity-weather' ) ), 404 );

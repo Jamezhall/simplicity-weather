@@ -4,7 +4,7 @@ Tags: weather, shortcode, geolocation, open-meteo, github-updater
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.5
+Stable tag: 0.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -23,6 +23,7 @@ Features include:
 * Shortcode output with `[simplicity_weather location="your-slug"]`
 * Selective shortcode fields and plain text output mode
 * AJAX badge mode with skeleton loading for cached pages
+* Global badge font sizing and before-text support for text-based output
 * PHP template helpers for themes
 * Built-in GitHub Releases updater for public repositories
 
@@ -56,6 +57,12 @@ No. Weather data is cached in the database and refreshed by WP-Cron or manual ad
 The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-weather`. Attach an installable zip asset to each release for WordPress updates to work.
 
 == Changelog ==
+
+= 0.1.6 =
+
+* Added global badge font-size control
+* Added `before` text support for plain text shortcode output and AJAX badge mode
+* Improved badge skeleton visibility on light backgrounds
 
 = 0.1.5 =
 
@@ -99,6 +106,10 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 * Built-in GitHub Releases updater
 
 == Upgrade Notice ==
+
+= 0.1.6 =
+
+Adds badge font-size control, before-text support, and a more visible loader on light backgrounds.
 
 = 0.1.5 =
 

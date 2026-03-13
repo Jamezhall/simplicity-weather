@@ -92,6 +92,7 @@ class Simplicity_Weather_Installer {
 			'badge_text_color'     => '#ffffff',
 			'badge_background_color' => '#1f2937',
 			'badge_font_family'    => 'Inter, sans-serif',
+			'badge_font_size'      => '14px',
 			'badge_padding'        => '6px 12px',
 			'badge_border_radius'  => '999px',
 			'cleanup_on_uninstall' => 0,

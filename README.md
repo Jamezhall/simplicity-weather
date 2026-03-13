@@ -2,7 +2,7 @@
 
 Reusable WordPress plugin for pulling current weather data from specific geolocations using Open-Meteo.
 
-Current version: `0.1.5`
+Current version: `0.1.6`
 
 ## Features
 
@@ -13,6 +13,7 @@ Current version: `0.1.5`
 - Shortcode output via `[simplicity_weather location="your-slug"]`
 - Selective shortcode fields and plain text output mode
 - AJAX badge mode with pill skeleton loading for cached pages
+- Global badge font-size control and before-text support for text-based output
 - Template helpers via `simplicity_weather_get()` and `simplicity_weather_render()`
 - Built-in GitHub Releases updater for public repositories
 
@@ -36,8 +37,10 @@ echo simplicity_weather_render( 'miami-office', array( 'fields' => 'temp,conditi
 - Full HTML: `[simplicity_weather location="edinburgh"]`
 - HTML with selected fields: `[simplicity_weather location="edinburgh" fields="temp,condition"]`
 - Plain text: `[simplicity_weather location="edinburgh" fields="temp,condition" format="text"]`
+- Plain text with before text: `[simplicity_weather location="edinburgh" fields="temp,condition" format="text" before="Currently: "]`
 - Plain text with custom separator: `[simplicity_weather location="edinburgh" fields="temp,condition" format="text" separator=" | "]`
 - AJAX badge for cached pages: `[simplicity_weather location="edinburgh" mode="ajax" fields="temp,condition"]`
+- AJAX badge with before text: `[simplicity_weather location="edinburgh" mode="ajax" fields="temp,condition" before="Currently: "]`
 
 ## GitHub Releases Updater
 
@@ -52,7 +55,7 @@ To deliver plugin updates through WordPress:
 1. Update the plugin version in `simplicity-weather.php`.
 2. Update `readme.txt` and `CHANGELOG.md`.
 3. Commit and push your changes to GitHub.
-4. Create a tag like `v0.1.5` that matches the plugin version.
+4. Create a tag like `v0.1.6` that matches the plugin version.
 5. Publish a GitHub Release for that tag.
 6. Confirm GitHub Actions uploads `simplicity-weather.zip` to the release.
 7. Verify the WordPress site detects the new version in the Plugins screen.

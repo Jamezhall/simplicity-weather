@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     formData.append('action', 'simplicity_weather_badge');
     formData.append('location', badge.getAttribute('data-location') || '');
     formData.append('fields', badge.getAttribute('data-fields') || '');
+    formData.append('before', badge.getAttribute('data-before') || '');
     formData.append('separator', badge.getAttribute('data-separator') || ', ');
 
     window.fetch(SimplicityWeatherBadge.ajaxUrl, {

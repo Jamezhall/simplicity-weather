@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.6] - 2026-03-13
+
+- Added global badge font-size control.
+- Added `before` text support for plain text shortcode output and AJAX badge mode.
+- Improved badge skeleton visibility on light badge backgrounds.
+
 ## [0.1.5] - 2026-03-13
 
 - Added AJAX badge shortcode mode for cached pages and Elementor layouts.
