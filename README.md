@@ -2,7 +2,7 @@
 
 Reusable WordPress plugin for pulling current weather data from specific geolocations using Open-Meteo.
 
-Current version: `0.1.4`
+Current version: `0.1.5`
 
 ## Features
 
@@ -12,6 +12,7 @@ Current version: `0.1.4`
 - Refresh-all tools, cron diagnostics, log retention, and log cleanup actions
 - Shortcode output via `[simplicity_weather location="your-slug"]`
 - Selective shortcode fields and plain text output mode
+- AJAX badge mode with pill skeleton loading for cached pages
 - Template helpers via `simplicity_weather_get()` and `simplicity_weather_render()`
 - Built-in GitHub Releases updater for public repositories
 
@@ -36,6 +37,7 @@ echo simplicity_weather_render( 'miami-office', array( 'fields' => 'temp,conditi
 - HTML with selected fields: `[simplicity_weather location="edinburgh" fields="temp,condition"]`
 - Plain text: `[simplicity_weather location="edinburgh" fields="temp,condition" format="text"]`
 - Plain text with custom separator: `[simplicity_weather location="edinburgh" fields="temp,condition" format="text" separator=" | "]`
+- AJAX badge for cached pages: `[simplicity_weather location="edinburgh" mode="ajax" fields="temp,condition"]`
 
 ## GitHub Releases Updater
 
@@ -50,7 +52,7 @@ To deliver plugin updates through WordPress:
 1. Update the plugin version in `simplicity-weather.php`.
 2. Update `readme.txt` and `CHANGELOG.md`.
 3. Commit and push your changes to GitHub.
-4. Create a tag like `v0.1.4` that matches the plugin version.
+4. Create a tag like `v0.1.5` that matches the plugin version.
 5. Publish a GitHub Release for that tag.
 6. Confirm GitHub Actions uploads `simplicity-weather.zip` to the release.
 7. Verify the WordPress site detects the new version in the Plugins screen.

@@ -89,6 +89,11 @@ class Simplicity_Weather_Installer {
 			'default_refresh'      => 30,
 			'enable_logging'       => 1,
 			'log_retention_days'   => 30,
+			'badge_text_color'     => '#ffffff',
+			'badge_background_color' => '#1f2937',
+			'badge_font_family'    => 'Inter, sans-serif',
+			'badge_padding'        => '6px 12px',
+			'badge_border_radius'  => '999px',
 			'cleanup_on_uninstall' => 0,
 			'github_repository'    => 'Jamezhall/simplicity-weather',
 		);

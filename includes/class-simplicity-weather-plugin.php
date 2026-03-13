@@ -171,9 +171,77 @@ class Simplicity_Weather_Plugin {
 		$current['default_refresh']       = isset( $settings['default_refresh'] ) ? max( 15, absint( $settings['default_refresh'] ) ) : 30;
 		$current['enable_logging']        = ! empty( $settings['enable_logging'] ) ? 1 : 0;
 		$current['log_retention_days']    = isset( $settings['log_retention_days'] ) ? max( 0, absint( $settings['log_retention_days'] ) ) : 30;
+		$current['badge_text_color']      = $this->sanitize_hex_setting( isset( $settings['badge_text_color'] ) ? $settings['badge_text_color'] : '', '#ffffff' );
+		$current['badge_background_color'] = $this->sanitize_hex_setting( isset( $settings['badge_background_color'] ) ? $settings['badge_background_color'] : '', '#1f2937' );
+		$current['badge_font_family']     = isset( $settings['badge_font_family'] ) ? sanitize_text_field( $settings['badge_font_family'] ) : 'Inter, sans-serif';
+		$current['badge_padding']         = $this->sanitize_css_spacing_setting( isset( $settings['badge_padding'] ) ? $settings['badge_padding'] : '', '6px 12px' );
+		$current['badge_border_radius']   = $this->sanitize_css_dimension_setting( isset( $settings['badge_border_radius'] ) ? $settings['badge_border_radius'] : '', '999px' );
 		$current['cleanup_on_uninstall']  = ! empty( $settings['cleanup_on_uninstall'] ) ? 1 : 0;
 
+		if ( '' === $current['badge_font_family'] ) {
+			$current['badge_font_family'] = 'Inter, sans-serif';
+		}
+
 		return $current;
+	}
+
+	/**
+	 * Sanitize a hex color setting.
+	 *
+	 * @param string $value Raw value.
+	 * @param string $default Default value.
+	 * @return string
+	 */
+	protected function sanitize_hex_setting( $value, $default ) {
+		$color = sanitize_hex_color( $value );
+
+		return $color ? $color : $default;
+	}
+
+	/**
+	 * Sanitize a CSS spacing setting.
+	 *
+	 * @param string $value Raw value.
+	 * @param string $default Default value.
+	 * @return string
+	 */
+	protected function sanitize_css_spacing_setting( $value, $default ) {
+		$value = trim( sanitize_text_field( $value ) );
+
+		if ( '' === $value ) {
+			return $default;
+		}
+
+		$parts = preg_split( '/\s+/', $value );
+
+		if ( empty( $parts ) || count( $parts ) > 4 ) {
+			return $default;
+		}
+
+		foreach ( $parts as $part ) {
+			if ( ! preg_match( '/^\d+(?:\.\d+)?(?:px|em|rem|%)$/', $part ) ) {
+				return $default;
+			}
+		}
+
+		return implode( ' ', $parts );
+	}
+
+	/**
+	 * Sanitize a CSS dimension setting.
+	 *
+	 * @param string $value Raw value.
+	 * @param string $default Default value.
+	 * @return string
+	 */
+	protected function sanitize_css_dimension_setting( $value, $default ) {
+		$value = trim( sanitize_text_field( $value ) );
+
+		if ( preg_match( '/^\d+(?:\.\d+)?(?:px|em|rem|%)$/', $value ) ) {
+			return $value;
+		}
+
+		return $default;
 	}
 
 	/**

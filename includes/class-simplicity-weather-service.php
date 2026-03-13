@@ -65,6 +65,11 @@ class Simplicity_Weather_Service {
 			'default_refresh'      => 30,
 			'enable_logging'       => 1,
 			'log_retention_days'   => 30,
+			'badge_text_color'     => '#ffffff',
+			'badge_background_color' => '#1f2937',
+			'badge_font_family'    => 'Inter, sans-serif',
+			'badge_padding'        => '6px 12px',
+			'badge_border_radius'  => '999px',
 			'cleanup_on_uninstall' => 0,
 			'github_repository'    => 'Jamezhall/simplicity-weather',
 		);
@@ -334,6 +339,31 @@ class Simplicity_Weather_Service {
 	 */
 	public function get_logs( $filters = array() ) {
 		return $this->logs->get_logs( $filters, 200 );
+	}
+
+	/**
+	 * Get formatted badge text from cached weather.
+	 *
+	 * @param string $slug Location slug.
+	 * @param string $fields Requested fields list.
+	 * @param string $separator Output separator.
+	 * @return string
+	 */
+	public function get_badge_text( $slug, $fields = '', $separator = ', ' ) {
+		$data = $this->get_weather_by_slug( $slug );
+
+		if ( empty( $data['current'] ) || empty( $data['location'] ) ) {
+			return '';
+		}
+
+		return simplicity_weather_build_text_output(
+			$data,
+			simplicity_weather_parse_fields( $fields ),
+			array(
+				'separator'    => $separator,
+				'show_updated' => true,
+			)
+		);
 	}
 
 	/**

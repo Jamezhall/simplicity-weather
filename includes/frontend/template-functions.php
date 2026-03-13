@@ -139,6 +139,18 @@ function simplicity_weather_should_render_field( $field, $fields ) {
  * @return string
  */
 function simplicity_weather_render_text( $data, $fields, $args ) {
+	return esc_html( simplicity_weather_build_text_output( $data, $fields, $args ) );
+}
+
+/**
+ * Build plain text weather output.
+ *
+ * @param array $data Weather data.
+ * @param array $fields Requested fields.
+ * @param array $args Render arguments.
+ * @return string
+ */
+function simplicity_weather_build_text_output( $data, $fields, $args ) {
 	$parts     = array();
 	$separator = isset( $args['separator'] ) ? (string) $args['separator'] : ', ';
 
@@ -172,5 +184,5 @@ function simplicity_weather_render_text( $data, $fields, $args ) {
 		);
 	}
 
-	return esc_html( implode( $separator, $parts ) );
+	return implode( $separator, $parts );
 }

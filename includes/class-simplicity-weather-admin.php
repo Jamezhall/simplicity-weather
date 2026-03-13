@@ -191,9 +191,10 @@ class Simplicity_Weather_Admin {
 					<p><strong><?php esc_html_e( 'Full output', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh"]</code></p>
 					<p><strong><?php esc_html_e( 'HTML with selected fields', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh" fields="temp,condition"]</code></p>
 					<p><strong><?php esc_html_e( 'Plain text output', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh" fields="temp,condition" format="text"]</code></p>
+					<p><strong><?php esc_html_e( 'AJAX badge for cached pages', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh" mode="ajax" fields="temp,condition"]</code></p>
 					<p><strong><?php esc_html_e( 'Template function', 'simplicity-weather' ); ?></strong><br /><code>echo simplicity_weather_render( 'edinburgh' );</code></p>
 					<p><strong><?php esc_html_e( 'Available fields', 'simplicity-weather' ); ?></strong><br /><code>location, temp, condition, wind, updated</code></p>
-					<p class="description"><?php esc_html_e( 'Text mode returns only the requested values, separated by commas by default.', 'simplicity-weather' ); ?></p>
+					<p class="description"><?php esc_html_e( 'Text mode returns only the requested values, separated by commas by default. AJAX badge mode is useful on cached Elementor pages.', 'simplicity-weather' ); ?></p>
 				</div>
 			</div>
 
@@ -374,6 +375,17 @@ class Simplicity_Weather_Admin {
 								<option value="0" <?php selected( $settings['log_retention_days'], 0 ); ?>><?php esc_html_e( 'Unlimited', 'simplicity-weather' ); ?></option>
 							</select>
 							<p class="description"><?php esc_html_e( 'Older logs are pruned automatically during scheduled refreshes unless retention is set to Unlimited.', 'simplicity-weather' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php esc_html_e( 'Badge Appearance', 'simplicity-weather' ); ?></th>
+						<td>
+							<p><label for="simplicity-weather-badge-text-color"><?php esc_html_e( 'Text Color', 'simplicity-weather' ); ?></label><br /><input id="simplicity-weather-badge-text-color" class="regular-text" type="text" name="simplicity_weather_settings[badge_text_color]" value="<?php echo esc_attr( $settings['badge_text_color'] ); ?>" /></p>
+							<p><label for="simplicity-weather-badge-background-color"><?php esc_html_e( 'Background Color', 'simplicity-weather' ); ?></label><br /><input id="simplicity-weather-badge-background-color" class="regular-text" type="text" name="simplicity_weather_settings[badge_background_color]" value="<?php echo esc_attr( $settings['badge_background_color'] ); ?>" /></p>
+							<p><label for="simplicity-weather-badge-font-family"><?php esc_html_e( 'Font Family', 'simplicity-weather' ); ?></label><br /><input id="simplicity-weather-badge-font-family" class="regular-text" type="text" name="simplicity_weather_settings[badge_font_family]" value="<?php echo esc_attr( $settings['badge_font_family'] ); ?>" /></p>
+							<p><label for="simplicity-weather-badge-padding"><?php esc_html_e( 'Padding', 'simplicity-weather' ); ?></label><br /><input id="simplicity-weather-badge-padding" class="regular-text" type="text" name="simplicity_weather_settings[badge_padding]" value="<?php echo esc_attr( $settings['badge_padding'] ); ?>" /></p>
+							<p><label for="simplicity-weather-badge-border-radius"><?php esc_html_e( 'Border Radius', 'simplicity-weather' ); ?></label><br /><input id="simplicity-weather-badge-border-radius" class="regular-text" type="text" name="simplicity_weather_settings[badge_border_radius]" value="<?php echo esc_attr( $settings['badge_border_radius'] ); ?>" /></p>
+							<p class="description"><?php esc_html_e( 'These global styles are used by AJAX badge mode, which is designed for cached page builders like Elementor.', 'simplicity-weather' ); ?></p>
 						</td>
 					</tr>
 					<tr>

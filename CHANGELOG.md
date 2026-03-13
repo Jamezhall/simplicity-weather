@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.5] - 2026-03-13
+
+- Added AJAX badge shortcode mode for cached pages and Elementor layouts.
+- Added a pill-shaped skeleton loader while badge content is fetched.
+- Added global badge appearance settings for text color, background color, font family, padding, and border radius.
+- Added frontend JS/CSS assets for badge hydration and loading states.
+
 ## [0.1.4] - 2026-03-12
 
 - Added shortcode field selection for `location`, `temp`, `condition`, `wind`, and `updated`.
