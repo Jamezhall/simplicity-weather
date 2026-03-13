@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.4] - 2026-03-12
+
+- Added shortcode field selection for `location`, `temp`, `condition`, `wind`, and `updated`.
+- Added plain text shortcode output with configurable separators.
+- Added usage examples to the Locations admin page.
+
 ## [0.1.3] - 2026-03-12
 
 - Added a `Refresh All Locations` admin action.

@@ -141,12 +141,14 @@ class Simplicity_Weather_Admin {
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Simplicity Weather Locations', 'simplicity-weather' ); ?></h1>
 			<?php $this->render_notice(); ?>
-			<h2><?php echo $editing ? esc_html__( 'Edit Location', 'simplicity-weather' ) : esc_html__( 'Add Location', 'simplicity-weather' ); ?></h2>
-			<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=simplicity-weather' ) ); ?>">
-				<?php wp_nonce_field( 'simplicity_weather_save_location' ); ?>
-				<input type="hidden" name="simplicity_weather_action" value="save_location" />
-				<input type="hidden" name="id" value="<?php echo $editing ? esc_attr( $editing['id'] ) : 0; ?>" />
-				<table class="form-table" role="presentation">
+			<div style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap;">
+				<div style="flex: 2; min-width: 320px;">
+					<h2><?php echo $editing ? esc_html__( 'Edit Location', 'simplicity-weather' ) : esc_html__( 'Add Location', 'simplicity-weather' ); ?></h2>
+					<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=simplicity-weather' ) ); ?>">
+						<?php wp_nonce_field( 'simplicity_weather_save_location' ); ?>
+						<input type="hidden" name="simplicity_weather_action" value="save_location" />
+						<input type="hidden" name="id" value="<?php echo $editing ? esc_attr( $editing['id'] ) : 0; ?>" />
+						<table class="form-table" role="presentation">
 					<tr>
 						<th scope="row"><label for="simplicity-weather-name"><?php esc_html_e( 'Name', 'simplicity-weather' ); ?></label></th>
 						<td><input id="simplicity-weather-name" class="regular-text" type="text" name="name" value="<?php echo $editing ? esc_attr( $editing['name'] ) : ''; ?>" required /></td>
@@ -180,9 +182,20 @@ class Simplicity_Weather_Admin {
 						<th scope="row"><?php esc_html_e( 'Active', 'simplicity-weather' ); ?></th>
 						<td><label><input type="checkbox" name="is_active" value="1" <?php checked( ! $editing || ! empty( $editing['is_active'] ) ); ?> /> <?php esc_html_e( 'Enable scheduled refreshes for this location.', 'simplicity-weather' ); ?></label></td>
 					</tr>
-				</table>
-				<?php submit_button( $editing ? __( 'Update Location', 'simplicity-weather' ) : __( 'Add Location', 'simplicity-weather' ) ); ?>
-			</form>
+						</table>
+						<?php submit_button( $editing ? __( 'Update Location', 'simplicity-weather' ) : __( 'Add Location', 'simplicity-weather' ) ); ?>
+					</form>
+				</div>
+				<div style="flex: 1; min-width: 280px; max-width: 420px; background: #fff; border: 1px solid #ccd0d4; padding: 16px; box-sizing: border-box;">
+					<h2 style="margin-top: 0;"><?php esc_html_e( 'Usage Examples', 'simplicity-weather' ); ?></h2>
+					<p><strong><?php esc_html_e( 'Full output', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh"]</code></p>
+					<p><strong><?php esc_html_e( 'HTML with selected fields', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh" fields="temp,condition"]</code></p>
+					<p><strong><?php esc_html_e( 'Plain text output', 'simplicity-weather' ); ?></strong><br /><code>[simplicity_weather location="edinburgh" fields="temp,condition" format="text"]</code></p>
+					<p><strong><?php esc_html_e( 'Template function', 'simplicity-weather' ); ?></strong><br /><code>echo simplicity_weather_render( 'edinburgh' );</code></p>
+					<p><strong><?php esc_html_e( 'Available fields', 'simplicity-weather' ); ?></strong><br /><code>location, temp, condition, wind, updated</code></p>
+					<p class="description"><?php esc_html_e( 'Text mode returns only the requested values, separated by commas by default.', 'simplicity-weather' ); ?></p>
+				</div>
+			</div>
 
 			<h2><?php esc_html_e( 'Saved Locations', 'simplicity-weather' ); ?></h2>
 			<table class="widefat striped">

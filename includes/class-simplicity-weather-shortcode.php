@@ -48,7 +48,10 @@ class Simplicity_Weather_Shortcode {
 	public function render( $atts ) {
 		$atts = shortcode_atts(
 			array(
-				'location' => '',
+				'location'  => '',
+				'fields'    => '',
+				'format'    => 'html',
+				'separator' => ', ',
 			),
 			$atts,
 			'simplicity_weather'
@@ -58,6 +61,13 @@ class Simplicity_Weather_Shortcode {
 			return '';
 		}
 
-		return simplicity_weather_render( $atts['location'] );
+		return simplicity_weather_render(
+			$atts['location'],
+			array(
+				'fields'    => $atts['fields'],
+				'format'    => $atts['format'],
+				'separator' => $atts['separator'],
+			)
+		);
 	}
 }

@@ -4,7 +4,7 @@ Tags: weather, shortcode, geolocation, open-meteo, github-updater
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.3
+Stable tag: 0.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,7 @@ Features include:
 * Custom database tables for locations, cache, and logs
 * Refresh-all tools, cron diagnostics, and log retention controls
 * Shortcode output with `[simplicity_weather location="your-slug"]`
+* Selective shortcode fields and plain text output mode
 * PHP template helpers for themes
 * Built-in GitHub Releases updater for public repositories
 
@@ -55,6 +56,12 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 
 == Changelog ==
 
+= 0.1.4 =
+
+* Added shortcode field selection for location, temp, condition, wind, and updated values
+* Added plain text shortcode output with configurable separators
+* Added shortcode and template usage examples beside the Locations admin form
+
 = 0.1.3 =
 
 * Added a Refresh All Locations action and status diagnostics for cron health and next run timing
@@ -84,6 +91,10 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 * Built-in GitHub Releases updater
 
 == Upgrade Notice ==
+
+= 0.1.4 =
+
+Adds selective shortcode fields, plain text output mode, and built-in usage examples in wp-admin.
 
 = 0.1.3 =
 
