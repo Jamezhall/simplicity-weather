@@ -1,47 +1,46 @@
 .simplicity-weather-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.2em;
-  padding: var(--sw-badge-padding, 6px 12px);
-  border-radius: var(--sw-badge-radius, 999px);
-  background: var(--sw-badge-background, #1f2937);
-  color: var(--sw-badge-color, #ffffff);
-  font-family: var(--sw-badge-font, Inter, sans-serif);
-  font-size: var(--sw-badge-font-size, 14px);
-  line-height: 1.2;
-  white-space: nowrap;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.08);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.2em;
+	padding: var(--sw-badge-padding, 6px 12px);
+	border-radius: var(--sw-badge-radius, 999px);
+	background: var(--sw-badge-background, #1f2937);
+	color: var(--sw-badge-color, #ffffff);
+	font-family: var(--sw-badge-font, Inter, sans-serif);
+	font-size: var(--sw-badge-font-size, 14px);
+	line-height: 1.2;
+	white-space: nowrap;
+	position: relative;
+	overflow: hidden;
 }
 
 .simplicity-weather-badge.is-loading {
-  color: transparent;
-  background-image: linear-gradient(0deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.08));
+	color: transparent;
+	background-image: linear-gradient(0deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.08));
 }
 
 .simplicity-weather-badge__skeleton {
-  display: block;
-  width: 7.5em;
-  height: 1em;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.18);
-  position: relative;
-  overflow: hidden;
+	display: block;
+	width: 7.5em;
+	height: 1em;
+	border-radius: 999px;
+	background: rgba(15, 23, 42, 0.18);
+	position: relative;
+	overflow: hidden;
 }
 
 .simplicity-weather-badge__skeleton::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.82), transparent);
-  animation: simplicity-weather-shimmer 1.25s infinite;
+	content: '';
+	position: absolute;
+	inset: 0;
+	transform: translateX(-100%);
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.82), transparent);
+	animation: simplicity-weather-shimmer 1.25s infinite;
 }
 
 @keyframes simplicity-weather-shimmer {
-  100% {
-    transform: translateX(100%);
-  }
+	100% {
+		transform: translateX(100%);
+	}
 }

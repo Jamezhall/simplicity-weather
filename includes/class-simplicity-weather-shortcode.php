@@ -165,8 +165,8 @@ class Simplicity_Weather_Shortcode {
 	public function ajax_badge() {
 		$location  = isset( $_REQUEST['location'] ) ? sanitize_title( wp_unslash( $_REQUEST['location'] ) ) : '';
 		$fields    = isset( $_REQUEST['fields'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['fields'] ) ) : '';
-		$before    = isset( $_REQUEST['before'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['before'] ) ) : '';
-		$separator = isset( $_REQUEST['separator'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['separator'] ) ) : ', ';
+		$before    = isset( $_REQUEST['before'] ) ? wp_kses( wp_unslash( $_REQUEST['before'] ), array() ) : '';
+		$separator = isset( $_REQUEST['separator'] ) ? wp_kses( wp_unslash( $_REQUEST['separator'] ), array() ) : ', ';
 
 		if ( empty( $location ) ) {
 			wp_send_json_error( array( 'message' => __( 'Weather unavailable', 'simplicity-weather' ) ), 400 );

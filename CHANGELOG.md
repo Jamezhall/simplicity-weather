@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2026-03-13
+
+- Fixed AJAX badge whitespace handling so regular spaces work in `before` text and separators.
+
 ## [0.1.6] - 2026-03-13
 
 - Added global badge font-size control.

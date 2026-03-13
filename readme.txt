@@ -4,7 +4,7 @@ Tags: weather, shortcode, geolocation, open-meteo, github-updater
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 0.1.6
+Stable tag: 0.1.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,10 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 
 == Changelog ==
 
+= 0.1.7 =
+
+* Fixed AJAX badge whitespace handling so regular spaces work correctly in `before` text and separators
+
 = 0.1.6 =
 
 * Added global badge font-size control
@@ -106,6 +110,10 @@ The plugin checks the latest public GitHub Release for `Jamezhall/simplicity-wea
 * Built-in GitHub Releases updater
 
 == Upgrade Notice ==
+
+= 0.1.7 =
+
+Fixes AJAX badge spacing so normal spaces work in `before` text and separators.
 
 = 0.1.6 =
 
